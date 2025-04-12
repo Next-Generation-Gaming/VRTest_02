@@ -1,0 +1,19 @@
+# ninja log v5
+1267	1364	7661584721607810	C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/394d2q2r/obj/arm64-v8a/libgame.so	51dda04b37511801
+31	936	7661584717096352	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	36b9371a5619d0f2
+25	940	7661584717241820	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1b03087d028df4a6
+37	1035	7661584718250506	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	e6d6363a92a8db0b
+1	941	7661584717251858	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	f9c651a75604d83a
+8	1053	7661584718422576	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	c16a3846e3024aa2
+47	977	7661584717598532	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	416d02c80e1f1337
+19	1175	7661584719667559	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	22dd70f475866b3c
+13	1267	7661584720571226	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	47a81b6c2ac41d5e
+8	806	7661602131106986	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1b03087d028df4a6
+23	848	7661602131547635	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	36b9371a5619d0f2
+34	896	7661602131984258	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	416d02c80e1f1337
+18	935	7661602132417444	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	f9c651a75604d83a
+13	999	7661602133033684	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	c16a3846e3024aa2
+42	1018	7661602133114708	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	e6d6363a92a8db0b
+28	1207	7661602135189516	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	22dd70f475866b3c
+3	1247	7661602135597828	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	47a81b6c2ac41d5e
+1247	1327	7661602136456186	C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/394d2q2r/obj/arm64-v8a/libgame.so	51dda04b37511801

@@ -1,0 +1,2 @@
+C:\Users\Nebula PC\Downloads\2025-04-12 01 VRTest_01\VRTest_01\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\Nebula PC\Downloads\2025-04-12 01 VRTest_01\VRTest_01\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

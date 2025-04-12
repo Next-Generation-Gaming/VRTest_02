@@ -1,0 +1,5 @@
+C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/.utmp/RelWithDebInfo/394d2q2r/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/.utmp/RelWithDebInfo/394d2q2r/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/.utmp/RelWithDebInfo/394d2q2r/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/.utmp/RelWithDebInfo/394d2q2r/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Nebula PC/Downloads/2025-04-12 01 VRTest_01/VRTest_01/.utmp/RelWithDebInfo/394d2q2r/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
