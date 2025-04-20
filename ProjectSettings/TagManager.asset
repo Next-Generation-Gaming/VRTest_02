@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - PlayerHands
+  - Emitter
+  - Plate
+  - Tag
   layers:
   - Default
   - TransparentFX

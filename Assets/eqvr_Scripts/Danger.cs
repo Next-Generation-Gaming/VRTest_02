@@ -9,7 +9,7 @@ public class Danger : MonoBehaviour
     public AudioClip audioClip;
     // public Image dangerImage;
     //public Text dangerText;
-    public GameObject dangerPanel;
+    //public GameObject dangerPanel;
     private MeshRenderer meshRenderer;
     private AudioSource audioReference;
 
@@ -25,7 +25,7 @@ public class Danger : MonoBehaviour
         if (meshRenderer != null)
         {
             meshRenderer.enabled = false;
-            dangerPanel.SetActive(false);
+            //dangerPanel.SetActive(false);
         }
     }
 
@@ -36,7 +36,7 @@ public class Danger : MonoBehaviour
             meshRenderer.enabled = true;
             GetComponent<AudioSource>().PlayOneShot(audioClip);
             audioReference.PlayOneShot(audioClip);
-            dangerPanel.SetActive(true);
+            //dangerPanel.SetActive(true);
         }
     }
 
@@ -52,7 +52,7 @@ public class Danger : MonoBehaviour
         if (other.tag == "Player")
         {
             meshRenderer.enabled = false;
-            dangerPanel.SetActive(false);
+           // dangerPanel.SetActive(false);
             audioReference.Stop();
         }
     }
