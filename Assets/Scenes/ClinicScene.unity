@@ -6992,6 +6992,9 @@ MonoBehaviour:
   isGuidedMode: 1
   isRaycastLineActive: 0
   isLeft: 0
+  ObjectRotationRange: 0
+  minimumEmitterDistance: 0
+  maximumEmitterDistance: 0
 --- !u!114 &789298513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7007,6 +7010,9 @@ MonoBehaviour:
   isGuidedMode: 1
   isRaycastLineActive: 0
   isLeft: 0
+  ObjectRotationRange: 0
+  minimumEmitterDistance: 0
+  maximumEmitterDistance: 0
 --- !u!114 &789298514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7022,6 +7028,9 @@ MonoBehaviour:
   isGuidedMode: 1
   isRaycastLineActive: 0
   isLeft: 0
+  ObjectRotationRange: 0
+  minimumEmitterDistance: 0
+  maximumEmitterDistance: 0
 --- !u!114 &789298515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7037,6 +7046,9 @@ MonoBehaviour:
   isGuidedMode: 1
   isRaycastLineActive: 0
   isLeft: 0
+  ObjectRotationRange: 0
+  minimumEmitterDistance: 0
+  maximumEmitterDistance: 0
 --- !u!114 &789298516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19399,6 +19411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3613895539597635324, guid: cfd8a2c4d0dc45441a377694c98808c1, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6814686456621331540, guid: cfd8a2c4d0dc45441a377694c98808c1, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -19407,6 +19423,10 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 756192407}
+    - target: {fileID: 7893125900579684397, guid: cfd8a2c4d0dc45441a377694c98808c1, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9120934306840284719, guid: cfd8a2c4d0dc45441a377694c98808c1, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
