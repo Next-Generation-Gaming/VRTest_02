@@ -12,36 +12,54 @@ public class RaycastLineChecker : MonoBehaviour
     private GameObject line1;
     private GameObject line2;
     private bool isLine1Active;
-
-    public float ObjectRotationRange;
-    private Quaternion minimumRotation;
-    private Quaternion maximumRotation;
+    
+    private float acceptableAngleEmitter = 10f;
+    private float acceptableAnglePlate;
+    public float angleTolerance = 5f;
 
     public float minimumEmitterDistance;
     public float maximumEmitterDistance;
+    public float minimumPlateDistance;
+    public float maximumPlateDistance;
 
     public void Awake()
     {
         isLeft = gameObject.name.StartsWith("L") || gameObject.name.StartsWith("l");
-
-        xrayType = ScenarioDataLoader.Instance.scenarioData.xrayType;
+        
+        // if Scenario Data Loader is not found, get xray type from parent of parent in BodyPartSetup
+        if (ScenarioDataLoader.Instance == null)
+        {
+            Debug.LogWarning("ScenarioDataLoader instance not found. Assuming xray type from Debug.");
+            xrayType = gameObject.transform.parent.parent.GetComponent<BodyPartSetup>().debugXrayType;
+        }
+        else
+        {
+            xrayType = ScenarioDataLoader.Instance.scenarioData.xrayType;
+        }
         Debug.Log("X-ray type: " + xrayType);
 
         switch (xrayType)
         {
             case XrayType.DP_DPI:
-                DPRaycastStart();
-                minimumRotation = Quaternion.Euler(-85, -10, -180);
-                maximumRotation = Quaternion.Euler(-75, 10, -170);
+                DPRaycastStart(); // 180f is straight vertical , 170f is a slight upwards rotation
+                acceptableAngleEmitter = 170f;
+                acceptableAnglePlate = 180f; 
+                // emitter angle is opposite to plate angle
                 break;
             case XrayType.DMPLO:
                 DMPLOCorrectedRaycastStart();
+                acceptableAngleEmitter = 170f;
+                acceptableAnglePlate = 180f; 
                 break;
             case XrayType.DLPMO:
                 DLPMORaycastStart();
+                acceptableAngleEmitter = 170f;
+                acceptableAnglePlate = 180f; 
                 break;
             case XrayType.LM:
                 LMRaycastStart();
+                acceptableAngleEmitter = 180f;
+                acceptableAnglePlate = 180f;
                 break;
             default:
                 Debug.LogError("Invalid X-ray type");
@@ -94,47 +112,8 @@ public class RaycastLineChecker : MonoBehaviour
         UpdateRayLine(frontRay, "Emitter", line1, frontDistance);
         UpdateRayLine(backRay, "Plate", line2, backDistance);
     }
-
-
-    private void UpdateRayLine(Ray ray, string expectedTag, GameObject lineObject, float distance)
-    {
-        if (lineObject == null) return;
-
-        Color targetColor = Color.red;
-
-        if (Physics.Raycast(ray, out RaycastHit hit, distance))
-        {
-            if (hit.collider.CompareTag(expectedTag))
-            {
-                targetColor = PositionAndRotationCheck(hit);
-            }
-            else
-            {
-                Debug.LogWarning($"Hit object with tag '{hit.collider.tag}', expected '{expectedTag}'");
-            }
-        }
-
-        ChangeLineColour(lineObject.GetComponent<LineRenderer>(), targetColor);
-    }
-
-    private Color PositionAndRotationCheck(RaycastHit hit)
-    {
-        // Distance Check
-        float distanceToHit = Vector3.Distance(transform.position, hit.point);
-        if (distanceToHit < minimumEmitterDistance || distanceToHit > maximumEmitterDistance)
-            return Color.red;
-
-        // Rotation Check: Compare surface normal to object's up direction
-        float angle = Vector3.Angle(hit.normal, transform.up);
-        if (angle <= ObjectRotationRange)
-            return Color.green;
-
-        return Color.red;
-    }
-
-
-
-    private void CreateVisibleLine(Vector3 direction)
+    
+    private void CreateVisibleLine(Vector3 endPoint)
     {
         GameObject lineObject = new GameObject(isLine1Active ? "Line2" : "Line1");
         LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
@@ -145,7 +124,7 @@ public class RaycastLineChecker : MonoBehaviour
         lineRenderer.endColor = Color.red;
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, direction);
+        lineRenderer.SetPosition(1, endPoint); // <-- using world position correctly
 
         if (!isLine1Active)
         {
@@ -158,6 +137,69 @@ public class RaycastLineChecker : MonoBehaviour
         }
 
         isLineActive = true;
+    }
+
+
+
+    private void UpdateRayLine(Ray ray, string expectedTag, GameObject lineObject, float distance)
+    {
+        if (lineObject == null) return;
+
+        Color targetColor = Color.red;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, distance))
+        {
+            if (hit.collider.CompareTag(expectedTag))
+            {
+                Debug.Log("Hit " + expectedTag + ": " + hit.collider.name);
+                targetColor = PositionAndRotationCheck(hit,expectedTag);
+            }
+        }
+
+        ChangeLineColour(lineObject.GetComponent<LineRenderer>(), targetColor);
+    }
+    
+    private Color PositionAndRotationCheck(RaycastHit hit, string expectedTag)
+    {
+        // Distance Check
+        float distanceToHit = Vector3.Distance(transform.position, hit.point);
+        Debug.Log("Distance to hit: " + distanceToHit);
+
+        if (expectedTag == "Emitter")
+        {
+            //Emitter Rotation and Distance Check
+            if (distanceToHit < minimumEmitterDistance || distanceToHit > maximumEmitterDistance)
+                return Color.red;
+
+            // Signed angle between forward and hit surface normal
+            float signedAngle = Vector3.SignedAngle(transform.forward, -hit.normal, transform.right);
+            Debug.Log("Signed Angle to surface: " + signedAngle);
+
+            // Handle wraparound correctly
+            if (Mathf.Abs(Mathf.DeltaAngle(signedAngle, acceptableAngleEmitter)) <= angleTolerance)
+                return Color.green;
+
+            return Color.red;
+        }
+        
+        if (expectedTag == "Plate")
+        {
+            Debug.Log("Found Plate");
+            if (distanceToHit < minimumPlateDistance || distanceToHit > maximumPlateDistance)
+                return Color.red;
+
+            // Signed angle between forward and hit surface normal
+            float signedAngle = Vector3.SignedAngle(transform.forward, -hit.normal, transform.right);
+            Debug.Log("Signed Angle to surface: " + signedAngle);
+
+            // Handle wraparound correctly
+            if (Mathf.Abs(Mathf.DeltaAngle(signedAngle, acceptableAnglePlate)) <= angleTolerance)
+                return Color.green;
+
+            return Color.red;
+        }
+        Debug.LogError("Invalid tag: " + expectedTag);
+        return Color.red;
     }
 
     private void ChangeLineColour(LineRenderer lineRenderer, Color color)
@@ -173,8 +215,8 @@ public class RaycastLineChecker : MonoBehaviour
     {
         Quaternion pitchDown = Quaternion.AngleAxis(-10f, transform.right);
         Vector3 pitchedDirection = pitchDown * transform.forward;
-        frontVector = transform.position + pitchedDirection * (0.15f * 7.5f);
-        backVector = transform.position - pitchedDirection * (0.25f);
+        frontVector = transform.position + pitchedDirection * 2f;
+        backVector = transform.position - transform.forward.normalized * (0.25f);
     }
 
     private void DMPLOCorrectedRaycastStart()
@@ -197,8 +239,8 @@ public class RaycastLineChecker : MonoBehaviour
                             (Quaternion.AngleAxis(-45, Vector3.up) * -transform.forward);
         }
 
-        frontVector = transform.position + frontDirection.normalized * (0.15f * 7.5f);
-        backVector = transform.position + backDirection.normalized * 0.25f;
+        frontVector = transform.position + frontDirection.normalized * (2f);
+        backVector = transform.position - transform.forward.normalized * (0.25f);
     }
 
     private void DLPMORaycastStart()
@@ -221,14 +263,14 @@ public class RaycastLineChecker : MonoBehaviour
                             (Quaternion.AngleAxis(45, Vector3.up) * -transform.forward);
         }
 
-        frontVector = transform.position + frontDirection.normalized * (0.15f * 7.5f);
-        backVector = transform.position + backDirection.normalized * 0.25f;
+        frontVector = transform.position + frontDirection.normalized * (2f);
+        backVector = transform.position - transform.forward.normalized * (0.25f);
     }
 
     private void LMRaycastStart()
     {
         Vector3 direction = isLeft ? -transform.right : transform.right;
-        frontVector = transform.position + direction * (0.15f * 7.5f);
-        backVector = transform.position - direction * 0.25f;
+        frontVector = transform.position + direction * (2f);
+        backVector = transform.position - transform.forward.normalized * (0.25f);
     }
 }

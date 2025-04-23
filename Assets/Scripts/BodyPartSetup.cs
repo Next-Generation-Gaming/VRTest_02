@@ -2,19 +2,40 @@ using UnityEngine;
 
 public class BodyPartSetup : MonoBehaviour
 {
-    
+    public bool DebugMode = false;
+    public XrayType debugXrayType = XrayType.None;
+    public BodyPart debugBodyPart = BodyPart.None;
+    public LegSelect debugLegSelection = LegSelect.None;
     private XrayType xrayType = XrayType.None;
     private BodyPart bodyPart;
     private LegSelect legSelection;
     void Start()
     {
-
+        if (DebugMode)
+        {
+            xrayType = debugXrayType;
+            Debug.Log("Debug X-ray type: " + xrayType);
+            bodyPart = debugBodyPart;
+            Debug.Log("Debug body part: " + bodyPart);
+            legSelection = debugLegSelection;
+            Debug.Log("Debug leg selection: " + legSelection);
+            
+            // create Scenario Data Loader instance and save the data
+            ScenarioDataLoader scenarioDataLoader = new ScenarioDataLoader();
+            scenarioDataLoader.SaveScenarioData(TrainingMode.None, TaskType.None, xrayType, bodyPart, legSelection);
+        }
+        
+        else
+        {
             xrayType = ScenarioDataLoader.Instance.scenarioData.xrayType;
             Debug.Log(xrayType);
             bodyPart = ScenarioDataLoader.Instance.scenarioData.bodyPart;
             Debug.Log(bodyPart);
             legSelection = ScenarioDataLoader.Instance.scenarioData.legSelection;
             Debug.Log(legSelection);
+        }
+    
+            
             
         // Find Body Part based on child index 
         // 0: Fetlock , 1: Foot , 2: Carpus , 3: Tarsus , 4: Stifle , 5: Head

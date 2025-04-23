@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class ScenarioDataLoader : MonoBehaviour
 {
-    [Header("If working in just the clinic scene, enable this script and set the data")]
-    [Header("The Main menu initialises this data so it needs to be set manually, if the main menu is not used")]
-    [Header("This needs to be done before playing the scene otherwise an error will occur")]
-    [Header("This is only for testing purposes")]
     public ScenarioData scenarioData = new ScenarioData();
     public static ScenarioDataLoader Instance { get; private set; }
     public void Start()
