@@ -65,6 +65,8 @@ public class BodyPartSetup : MonoBehaviour
                 Debug.LogError("Invalid body part");
                 break;
         }
+        
+        Debug.Log(bodyPart + " activated");
     }
     
     //Activate Body Part was made into a function as it was used multiple times above,
@@ -97,6 +99,8 @@ public class BodyPartSetup : MonoBehaviour
                 Debug.LogError("Invalid leg selection");
                 break;
         }
+        
+        Debug.Log(legSelection + " activated");
     }
 
     // Below was made into a function as it was used multiple times,

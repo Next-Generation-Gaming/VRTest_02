@@ -29,40 +29,40 @@ public class RaycastLineChecker : MonoBehaviour
         // if Scenario Data Loader is not found, get xray type from parent of parent in BodyPartSetup
         if (ScenarioDataLoader.Instance == null)
         {
-            Debug.LogWarning("ScenarioDataLoader instance not found. Assuming xray type from Debug.");
+            //Debug.LogWarning("ScenarioDataLoader instance not found. Assuming xray type from Debug.");
             xrayType = gameObject.transform.parent.parent.GetComponent<BodyPartSetup>().debugXrayType;
         }
         else
         {
             xrayType = ScenarioDataLoader.Instance.scenarioData.xrayType;
         }
-        Debug.Log("X-ray type: " + xrayType);
+        //Debug.Log("X-ray type: " + xrayType);
 
         switch (xrayType)
         {
             case XrayType.DP_DPI:
-                DPRaycastStart(); // 180f is straight vertical , 170f is a slight upwards rotation
-                acceptableAngleEmitter = 170f;
+                DPRaycastStart(); // 180f is straight vertical , 170f is a slight upwards rotation (Plate) , 0f is straight vertical for Emitter
+                acceptableAngleEmitter = -10f;
                 acceptableAnglePlate = 180f; 
                 // emitter angle is opposite to plate angle
                 break;
             case XrayType.DMPLO:
                 DMPLOCorrectedRaycastStart();
-                acceptableAngleEmitter = 170f;
+                acceptableAngleEmitter = -10f;
                 acceptableAnglePlate = 180f; 
                 break;
             case XrayType.DLPMO:
                 DLPMORaycastStart();
-                acceptableAngleEmitter = 170f;
+                acceptableAngleEmitter = -10f;
                 acceptableAnglePlate = 180f; 
                 break;
             case XrayType.LM:
                 LMRaycastStart();
-                acceptableAngleEmitter = 180f;
+                acceptableAngleEmitter = 0f;
                 acceptableAnglePlate = 180f;
                 break;
             default:
-                Debug.LogError("Invalid X-ray type");
+                //Debug.LogError("Invalid X-ray type");
                 break;
         }
 
@@ -100,15 +100,16 @@ public class RaycastLineChecker : MonoBehaviour
         Ray frontRay = new Ray(transform.position, forwardDirection);
         Ray backRay = new Ray(transform.position, backwardDirection);
 
-        Debug.DrawRay(frontRay.origin, frontRay.direction * frontDistance, Color.blue);
+        Debug.DrawRay(frontRay.origin, frontRay.direction * frontDistance, Color.red);
         Debug.DrawRay(backRay.origin, backRay.direction * backDistance, Color.blue);
 
         if (isGuidedMode && !isLineActive)
         {
+            //Debug.Log("Drawing lines in guided mode");
             CreateVisibleLine(transform.position + forwardDirection * frontDistance);
             CreateVisibleLine(transform.position + backwardDirection * backDistance);
         }
-
+        //Debug.Log("Updating ray lines... waiting for correct tag");
         UpdateRayLine(frontRay, "Emitter", line1, frontDistance);
         UpdateRayLine(backRay, "Plate", line2, backDistance);
     }
@@ -124,7 +125,7 @@ public class RaycastLineChecker : MonoBehaviour
         lineRenderer.endColor = Color.red;
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, endPoint); // <-- using world position correctly
+        lineRenderer.SetPosition(1, endPoint);
 
         if (!isLine1Active)
         {
@@ -143,15 +144,22 @@ public class RaycastLineChecker : MonoBehaviour
 
     private void UpdateRayLine(Ray ray, string expectedTag, GameObject lineObject, float distance)
     {
-        if (lineObject == null) return;
+        if (lineObject == null)
+        {
+            //Debug.LogWarning("Line object is null");
+            return;
+        }
+        
+        //Debug.Log("Raycasting from: " + ray.origin + " to: " + ray.direction);
 
         Color targetColor = Color.red;
 
         if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
+            //Debug.Log("Hit: " + hit.collider.name);
             if (hit.collider.CompareTag(expectedTag))
             {
-                Debug.Log("Hit " + expectedTag + ": " + hit.collider.name);
+                //Debug.Log("Hit " + expectedTag + ": " + hit.collider.name);
                 targetColor = PositionAndRotationCheck(hit,expectedTag);
             }
         }
@@ -163,7 +171,7 @@ public class RaycastLineChecker : MonoBehaviour
     {
         // Distance Check
         float distanceToHit = Vector3.Distance(transform.position, hit.point);
-        Debug.Log("Distance to hit: " + distanceToHit);
+        Debug.Log("Distance to hit: " + distanceToHit + " for tag: " + expectedTag);
 
         if (expectedTag == "Emitter")
         {
@@ -173,7 +181,7 @@ public class RaycastLineChecker : MonoBehaviour
 
             // Signed angle between forward and hit surface normal
             float signedAngle = Vector3.SignedAngle(transform.forward, -hit.normal, transform.right);
-            Debug.Log("Signed Angle to surface: " + signedAngle);
+            Debug.Log("Signed Angle to surface: " + signedAngle + " for tag: " + expectedTag);
 
             // Handle wraparound correctly
             if (Mathf.Abs(Mathf.DeltaAngle(signedAngle, acceptableAngleEmitter)) <= angleTolerance)
@@ -184,13 +192,13 @@ public class RaycastLineChecker : MonoBehaviour
         
         if (expectedTag == "Plate")
         {
-            Debug.Log("Found Plate");
+            //Debug.Log("Found Plate");
             if (distanceToHit < minimumPlateDistance || distanceToHit > maximumPlateDistance)
                 return Color.red;
 
             // Signed angle between forward and hit surface normal
             float signedAngle = Vector3.SignedAngle(transform.forward, -hit.normal, transform.right);
-            Debug.Log("Signed Angle to surface: " + signedAngle);
+            Debug.Log("Signed Angle to surface: " + signedAngle + " for tag: " + expectedTag);
 
             // Handle wraparound correctly
             if (Mathf.Abs(Mathf.DeltaAngle(signedAngle, acceptableAnglePlate)) <= angleTolerance)
@@ -198,7 +206,7 @@ public class RaycastLineChecker : MonoBehaviour
 
             return Color.red;
         }
-        Debug.LogError("Invalid tag: " + expectedTag);
+        //Debug.LogError("Invalid tag: " + expectedTag);
         return Color.red;
     }
 

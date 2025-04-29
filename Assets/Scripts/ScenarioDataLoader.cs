@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScenarioDataLoader : MonoBehaviour
 {
-    public ScenarioData scenarioData = new ScenarioData();
+    public ScenarioData scenarioData;
     public static ScenarioDataLoader Instance { get; private set; }
     public void Start()
     {
