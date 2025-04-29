@@ -56,7 +56,7 @@ public class NewMainMenuFunctions : MonoBehaviour
         // loop through children , starting at index 1 and set to false
         for (int i = 1; i < initialMenu.transform.childCount; i++)
         {
-            initialMenu.transform.GetChild(i).gameObject.SetActive(false);
+            initialMenu.transform.parent.GetChild(i).gameObject.SetActive(false);
         }
     }
 

@@ -248,7 +248,7 @@ public class RaycastLineChecker : MonoBehaviour
         }
 
         frontVector = transform.position + frontDirection.normalized * (2f);
-        backVector = transform.position - transform.forward.normalized * (0.25f);
+        backVector = transform.position - backDirection.normalized * (0.25f);
     }
 
     private void DLPMORaycastStart()
@@ -279,6 +279,6 @@ public class RaycastLineChecker : MonoBehaviour
     {
         Vector3 direction = isLeft ? -transform.right : transform.right;
         frontVector = transform.position + direction * (2f);
-        backVector = transform.position - transform.forward.normalized * (0.25f);
+        backVector = transform.position - direction * (0.25f);
     }
 }
