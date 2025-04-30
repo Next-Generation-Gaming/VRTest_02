@@ -7824,7 +7824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d5a90a5a93bf04383f699c30cc5e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMode: 1
+  DebugMode: 0
   debugXrayType: 2
   debugBodyPart: 6
   debugLegSelection: 1
