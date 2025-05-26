@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+using Aaron_25;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -12,6 +14,9 @@ public class Danger : MonoBehaviour
     //public GameObject dangerPanel;
     private MeshRenderer meshRenderer;
     private AudioSource audioReference;
+    public Side side;
+    
+    private bool hasEntered = false;
 
     void Start()
     {
@@ -38,6 +43,29 @@ public class Danger : MonoBehaviour
             audioReference.PlayOneShot(audioClip);
             //dangerPanel.SetActive(true);
         }
+        
+        if (other.tag == "Player" && side == Side.Front)
+        {
+            if (hasEntered)
+            {
+                // if has already entered, play more agressive sound
+                AudioManager.Instance.PlayAudio(4, AudioLibraryType.Horse, true);
+                return;
+            }
+            AudioManager.Instance.PlayAudio(3,AudioLibraryType.Horse,true);
+        }
+        else if (other.tag == "Player" && side == Side.Back)
+        {
+            if (hasEntered)
+            {
+                // if has already entered, play more agressive sound
+                AudioManager.Instance.PlayAudio(6, AudioLibraryType.Horse, true);
+                return;
+            }
+            AudioManager.Instance.PlayAudio(5,AudioLibraryType.Horse,true);
+        }
+        
+        hasEntered = true;
     }
 
     //private void OnTriggerStay(Collider other)
@@ -55,5 +83,11 @@ public class Danger : MonoBehaviour
            // dangerPanel.SetActive(false);
             audioReference.Stop();
         }
+    }
+    
+    public enum Side
+    {
+        Front,
+        Back
     }
 }

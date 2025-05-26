@@ -262,8 +262,7 @@ namespace Aaron_25
             Debug.Log("Audio queue cleared");
         }
     }
-
-    [System.Serializable]
+    
     public struct AudioClipData
     {
         public int audioClipID;
