@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Aaron_25;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,6 +48,8 @@ public class NewMainMenuFunctions : MonoBehaviour
         bodyParts.Add(BodyPart.Tarsus);
         bodyParts.Add(BodyPart.Stifle);
         bodyParts.Add(BodyPart.Head);
+        
+        ResetSelections();
     }
 
     private void InitalMenuSetup()
@@ -65,6 +68,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     //Mode Buttons:
     public void OnGuidedModeButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(3,AudioLibraryType.MainMenuSFX,true);
         initialMenu.SetActive(false);
         GuidedMode_Menu1.SetActive(true);
         trainingMode = TrainingMode.GuidedMode;
@@ -72,6 +76,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     }
     public void OnAssessmentButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(3,AudioLibraryType.MainMenuSFX,true);
         initialMenu.SetActive(false);
         AssessmentMode_Menu1.SetActive(true);
         trainingMode = TrainingMode.AssessmentMode;
@@ -82,6 +87,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     //Task Select (Emitter, Plate or Both)
     public void OnTaskSelection(int selection)
     {
+        AudioManager.Instance.PlayAudio(3,AudioLibraryType.MainMenuSFX,true);
         switch (selection)
         {
             case 0:
@@ -110,16 +116,19 @@ public class NewMainMenuFunctions : MonoBehaviour
     //Dropdown toggles
     public void OnXrayDropdownButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         XrayDropdown.SetActive(!XrayDropdown.activeSelf);
         Debug.Log("Xray dropdown button pressed");
     }
     public void OnBodyPartDropdownButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         BodyPartDropdown.SetActive(!BodyPartDropdown.activeSelf);
         Debug.Log("Body Part Dropdown button pressed");
     }
     public void OnLegSelectionDropdownButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         LegSelectionDropdown.SetActive(!LegSelectionDropdown.activeSelf);
         Debug.Log("Leg Selection Dropdown button pressed");
     }
@@ -128,6 +137,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     //Dropdown Choice Selection
     public void OnXrayTypeSelected(int selection)
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         switch (selection)
         {
             case 0:
@@ -155,6 +165,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     }
     public void OnBodyPartSelected(int selection)
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         switch (selection)
         {
             case 0:
@@ -189,6 +200,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     }
     public void OnLegSelection(int selection)
     {
+        AudioManager.Instance.PlayAudio(0,AudioLibraryType.MainMenuSFX,true);
         switch (selection)
         {
             case 0:
@@ -229,6 +241,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     
     private void ShowConfirmationScreen()
     {
+        AudioManager.Instance.PlayAudio(3,AudioLibraryType.MainMenuSFX,false);
         AssessmentMode_Menu1.SetActive(false);
         GuidedMode_Menu2.SetActive(false);
         var selectRoleText = ConfirmationScreen.transform.GetChild(3).GetComponentInChildren<TMP_Text>();
@@ -246,6 +259,7 @@ public class NewMainMenuFunctions : MonoBehaviour
     //Also a Unity Button Event
     public void OnConfirmationButtonPressed()
     {
+        AudioManager.Instance.PlayAudio(3,AudioLibraryType.MainMenuSFX,true);
         ScenarioDataLoader.Instance.SaveScenarioData(trainingMode, taskType, xrayType, bodyPart, legSelection);
     
         bool isDataValid = CheckScenarioData();
@@ -289,13 +303,13 @@ public class NewMainMenuFunctions : MonoBehaviour
     
     public void ResetSelections()
     {
+        AudioManager.Instance.PlayAudio(2,AudioLibraryType.MainMenuSFX,true);
         // Set all data to none
         trainingMode = TrainingMode.None;
-        xrayType = XrayType.None;
-        bodyPart = BodyPart.None;
         taskType = TaskType.None;
         xrayType = XrayType.None;
         bodyPart = BodyPart.None;
+        legSelection = LegSelect.None;
         Debug.Log("All data has been reset");
         
         // Get the text components for the dropdowns and reset them
