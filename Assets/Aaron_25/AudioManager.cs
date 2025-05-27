@@ -243,6 +243,15 @@ namespace Aaron_25
         {
             PlayAudio(1, AudioLibraryType.MainMenuSFX);
         }
+        public void PlayPickupSFX()
+        {
+            PlayAudio(8, AudioLibraryType.Player);
+        }
+        
+        public void PlayPutdownSFX()
+        {
+            PlayAudio(9, AudioLibraryType.Player);
+        }
 
         public bool IsPlaying(AudioLibraryType audioLibraryType)
         {
