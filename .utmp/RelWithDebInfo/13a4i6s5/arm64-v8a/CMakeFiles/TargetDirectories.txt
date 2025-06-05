@@ -1,0 +1,5 @@
+D:/Projects/Unity Projects/20250605 Mohd_Horse_Final_VR/VRTest_02/.utmp/RelWithDebInfo/13a4i6s5/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Projects/Unity Projects/20250605 Mohd_Horse_Final_VR/VRTest_02/.utmp/RelWithDebInfo/13a4i6s5/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Projects/Unity Projects/20250605 Mohd_Horse_Final_VR/VRTest_02/.utmp/RelWithDebInfo/13a4i6s5/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/Projects/Unity Projects/20250605 Mohd_Horse_Final_VR/VRTest_02/.utmp/RelWithDebInfo/13a4i6s5/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/Projects/Unity Projects/20250605 Mohd_Horse_Final_VR/VRTest_02/.utmp/RelWithDebInfo/13a4i6s5/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,2 @@
+D:\Projects\Unity Projects\20250605 Mohd_Horse_Final_VR\VRTest_02\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+D:\Projects\Unity Projects\20250605 Mohd_Horse_Final_VR\VRTest_02\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
