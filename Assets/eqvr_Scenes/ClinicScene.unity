@@ -1581,7 +1581,7 @@ MonoBehaviour:
   - 0
   - 45
   - 90
-  correctImage: {fileID: 0}
+  correctImage: {fileID: 2800000, guid: 3f61d2699d210cc459c3ea02c30b2816, type: 3}
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   showAngleGizmos: 1
 --- !u!4 &213515495
@@ -1593,7 +1593,7 @@ Transform:
   m_GameObject: {fileID: 213515492}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.3783126, y: -0.47147006, z: -0.38234952}
+  m_LocalPosition: {x: -0.239, y: -0.47147006, z: -0.38234952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2972,7 +2972,6 @@ GameObject:
   m_Component:
   - component: {fileID: 312657094}
   - component: {fileID: 312657096}
-  - component: {fileID: 312657095}
   m_Layer: 0
   m_Name: XrayPositioning
   m_TagString: Untagged
@@ -2997,27 +2996,6 @@ Transform:
   - {fileID: 213515495}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &312657095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312657093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a97891aaeac3c949942c0cec2345968, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plate: {fileID: 1776098576}
-  emitter: {fileID: 1175425969}
-  plateDetectionRadius: 0.2
-  plateAngleThreshold: 5
-  emitterMinDistance: 0.3
-  emitterMaxDistance: 0.6
-  emitterAngleThreshold: 5
-  emitterPlateAngleThreshold: 5
-  inputScript: {fileID: 1895255093}
 --- !u!120 &312657096
 LineRenderer:
   serializedVersion: 2
@@ -3934,7 +3912,7 @@ MonoBehaviour:
   emitterMaxDistance: 0.6
   emitterAngleThreshold: 5
   emitterPlateAngleThreshold: 5
-  inputScript: {fileID: 0}
+  inputScript: {fileID: 1895255093}
 --- !u!120 &440465181
 LineRenderer:
   serializedVersion: 2
