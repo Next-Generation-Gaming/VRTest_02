@@ -1593,7 +1593,7 @@ Transform:
   m_GameObject: {fileID: 213515492}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.239, y: -0.47147006, z: -0.38234952}
+  m_LocalPosition: {x: -0.2129, y: -0.47147006, z: -0.38234952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3906,12 +3906,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plate: {fileID: 1776098576}
   emitter: {fileID: 1175425969}
-  plateDetectionRadius: 0.2
-  plateAngleThreshold: 5
-  emitterMinDistance: 0.3
-  emitterMaxDistance: 0.6
-  emitterAngleThreshold: 5
-  emitterPlateAngleThreshold: 5
+  plateDetectionRadius: 0.8
+  plateAngleThreshold: 15
+  emitterMinDistance: 0.1
+  emitterMaxDistance: 1.5
+  emitterAngleThreshold: 15
+  emitterPlateAngleThreshold: 15
   inputScript: {fileID: 1895255093}
 --- !u!120 &440465181
 LineRenderer:
